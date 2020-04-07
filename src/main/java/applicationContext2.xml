@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="caculatorImp" class="aop.xml.CaculatorImp"></bean>
+	<bean id="loggingAspect" class="aop.xml.AopLoggingAspect"></bean>
+	<bean id="validatorAspect" class="aop.xml.AopValidatorAspect"></bean>
+	<aop:config>
+		<aop:pointcut
+			expression="execution(public int aop.xml.Caculator.*(int, int))"
+			id="pointcut" />
+		<aop:aspect ref="loggingAspect" order="2">
+			<aop:before method="beforeMethode" pointcut-ref="pointcut" />
+			<aop:after method="afterMethode" pointcut-ref="pointcut"/>
+			<aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="result"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="ex"/>
+		</aop:aspect>
+		<aop:aspect ref="validatorAspect" order="1">
+		<aop:before method="beforeMethode" pointcut-ref="pointcut"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
