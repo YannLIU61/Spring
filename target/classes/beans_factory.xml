@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- StaticFactory 配置Bean实例 -->
+	<bean id="car" class="beans.factory.StaticCarFactory"
+		factory-method="getCar">
+		<constructor-arg value="audi"></constructor-arg>
+	</bean>
+
+	<!-- InstanceFactory 先实例化工厂 -->
+	<bean id="instanceCarFactory"
+		class="beans.factory.InstanceCarFactory"></bean>
+	<!-- 通过实例工厂配置Bean -->
+	<bean id="car2" factory-bean="instanceCarFactory"
+		factory-method="getCar">
+		<constructor-arg value="bmw"></constructor-arg>
+	</bean>
+	
+	<!-- FactoryBean -->
+	<bean id="car3" class="beans.factory.CarFactoryBean">
+	<property name="band" value="BMW"></property>
+	</bean>
+</beans>

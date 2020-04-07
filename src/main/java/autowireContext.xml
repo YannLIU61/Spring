@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- scope 属性 默认singleton单例 创建容器的时候就创建实例; prototype 每次创建新例, 创建容器时不创建bean的实例, 每次请求时创建 -->
+<bean id="car" class="beans.autowire.Car" p:band="BMW" p:price="500000" ></bean>
+<bean id="address" class="beans.autowire.Address" p:city="ShangHai" p:street="BaoShanLu"></bean>
+<!-- <bean id="person" class="beans.autowire.Person" p:name="LIU Yan" p:address-ref="address" p:car-ref="car"></bean> -->
+<!--(很少使用) AutoWire byName: 根据bean的id名字和要配置的bean的setter自动匹配
+			  byType: 根据类型匹配(每个类型要唯一)
+ -->
+<bean id="person" class="beans.autowire.Person" p:name="LIU Yan" autowire="byName"></bean>
+
+</beans>

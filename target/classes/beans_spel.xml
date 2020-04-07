@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd">
+	<bean id="address" class="beans.spel.Address" p:city="Shanghai"
+		p:street="Bao Shan Lu"></bean>
+	<bean id="car" class="beans.spel.Car" p:band="BMW"
+		p:price="450000">
+		<!-- 使用SPEL应用类的静态属性 -->
+		<property name="taille" value="#{T(java.lang.Math).PI*80}"></property>
+	</bean>
+	<bean id="person" class="beans.spel.Person">
+	<!-- <property name="car" ref="car"></property> -->
+	<!-- 使用SPEL 引用其他bean -->
+	<property name="car" value="#{car}"></property>
+	<!-- 使用SPEL 引用其他bean属性 -->
+	<property name="city" value="#{address.city}"></property>
+	<property name="info" value="#{car.price>300000? '金领':'白领'}"></property>
+	</bean>
+
+</beans>
